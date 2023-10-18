@@ -6,12 +6,8 @@ import 'package:recipes_app/screens/meals.dart';
 import 'package:recipes_app/widgets/category_grid_item.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen(
-      {super.key,
-      // required this.onToggleFavorite,
-      required this.availableMeals});
+  const CategoriesScreen({super.key, required this.availableMeals});
 
-  //final void Function(Meal meal) onToggleFavorite;
   final List<Meal> availableMeals;
 
   @override
@@ -27,7 +23,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       lowerBound: 0,
       upperBound: 1,
     );
@@ -51,7 +47,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         builder: (ctx) => MealsScreen(
           title: category.title,
           meals: filteredMeals,
-          //onToggleFavorite: onToggleFavorite,
         ),
       ),
     );
@@ -62,8 +57,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     return AnimatedBuilder(
       animation: _animationController,
       child: GridView(
-        padding: EdgeInsets.all(24),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        padding: const EdgeInsets.all(24),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,
           crossAxisSpacing: 20,
@@ -81,8 +76,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       ),
       builder: (context, child) => SlideTransition(
         position: Tween(
-          begin: Offset(0, 0.3),
-          end: Offset(0, 0),
+          begin: const Offset(0, 0.3),
+          end: const Offset(0, 0),
         ).animate(
           CurvedAnimation(
             parent: _animationController,

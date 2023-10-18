@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app/models/meal.dart';
@@ -8,12 +6,10 @@ import 'package:recipes_app/providers/favorites_provider.dart';
 class MealDetailsScreen extends ConsumerWidget {
   const MealDetailsScreen({
     super.key,
-    // required this.onToggleFavorite,
     required this.meal,
   });
 
   final Meal meal;
-  // final void Function(Meal meal) onToggleFavorite;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,7 +36,7 @@ class MealDetailsScreen extends ConsumerWidget {
               );
             },
             icon: AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               transitionBuilder: (child, animation) {
                 return RotationTransition(
                   turns: Tween<double>(begin: 0.5, end: 1).animate(animation),
@@ -67,7 +63,7 @@ class MealDetailsScreen extends ConsumerWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 14,
             ),
             Text(
@@ -76,7 +72,7 @@ class MealDetailsScreen extends ConsumerWidget {
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 14,
             ),
             for (final ingredient in meal.ingredients)
@@ -86,7 +82,7 @@ class MealDetailsScreen extends ConsumerWidget {
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
               ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Text(
@@ -95,7 +91,7 @@ class MealDetailsScreen extends ConsumerWidget {
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 14,
             ),
             for (final step in meal.steps)

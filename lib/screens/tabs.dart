@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipes_app/models/meal.dart';
 import 'package:recipes_app/providers/favorites_provider.dart';
 import 'package:recipes_app/screens/categories.dart';
 import 'package:recipes_app/screens/filters.dart';
@@ -24,7 +23,6 @@ class TabsScreen extends ConsumerStatefulWidget {
 
 class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
-  // final List<Meal> _favoriteMeals = [];
   Map<Filter, bool> _selectedFilters = kInitialFilters;
 
   void _selectPage(int index) {
@@ -32,22 +30,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       _selectedPageIndex = index;
     });
   }
-
-  // void _toggleMealFavoriteStatus(Meal meal) {
-  //   final isExisting = _favoriteMeals.contains(meal);
-
-  //   if (isExisting) {
-  //     setState(() {
-  //       _favoriteMeals.remove(meal);
-  //     });
-  //     _showInfoMessage('Meal is no longer a favorite');
-  //   } else {
-  //     setState(() {
-  //       _favoriteMeals.add(meal);
-  //     });
-  //     _showInfoMessage('Meal marked as favorite');
-  //   }
-  // }
 
   void _setScreen(String identifier) async {
     Navigator.of(context).pop();
@@ -88,7 +70,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     }).toList();
 
     Widget activePage = CategoriesScreen(
-      //onToggleFavorite: _toggleMealFavoriteStatus,
       availableMeals: avaialableMeals,
     );
     var activePageTitle = 'Categories';
@@ -97,7 +78,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       final favoriteMeals = ref.watch(favoriteMealsProvider);
       activePage = MealsScreen(
         meals: favoriteMeals,
-        // onToggleFavorite: _toggleMealFavoriteStatus,
       );
       activePageTitle = 'Your Favorites';
     }
@@ -113,7 +93,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         currentIndex: _selectedPageIndex,
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.set_meal), label: 'Categories'),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favorites'),
